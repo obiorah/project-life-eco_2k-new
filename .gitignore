@@ -1,0 +1,26 @@
+# Dependencies
+/node_modules
+
+# Remix files
+/build
+/public/build
+
+# Vite files
+.vite/
+
+# Environment variables
+.env*
+!.env.example
+!.env.development
+!.env.production
+
+# Log files
+*.log
+
+# Optional generated files
+.cache
+*.tsbuildinfo
+
+# OS generated files
+.DS_Store
+Thumbs.db
