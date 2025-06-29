@@ -6,7 +6,7 @@ import { createClient } from '@supabase/supabase-js';
 // stored securely (e.g., in environment variables).
 const sessionSecret = process.env.SESSION_SECRET || "super-secret-dev-key";
 
-export const sessionStorage = createCookieSessionStorage({
+const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "__session",
     httpOnly: true,
@@ -21,7 +21,7 @@ export const sessionStorage = createCookieSessionStorage({
 export const { getSession, commitSession, destroySession } = sessionStorage;
 
 // Add RLS policies for profiles table access
-export const supabase = createClient(
+const supabase = createClient(
   process.env.SUPABASE_URL!,
   process.env.SUPABASE_ANON_KEY!,
   {
@@ -40,7 +40,7 @@ export const supabase = createClient(
 );
 
 // Updated function to verify session user exists
-export async function verifySessionUser(userId: string) {
+async function verifySessionUser(userId: string) {
   // Changed from 'users' to 'profiles'
   const { data: user, error } = await supabaseAdmin
     .from('profiles')

@@ -1,28 +1,62 @@
-export type User = {
+export type UserRole = 'User' | 'Admin' | 'Super Admin';
+export type UserStatus = 'Active' | 'Suspended';
+
+export interface User {
   id: string;
   email: string;
-  full_name: string | null;
+  fullName: string;
   balance: number;
-  role: 'User' | 'Admin' | 'Super Admin';
-  created_at: string;
-  group_id: string | null;
-  is_suspended: boolean;
-};
+  role: UserRole;
+  createdAt: string;
+  status: UserStatus;
+  groupId?: string;
+  groupName?: string;
+  avatarUrl?: string;
+  isSuspended?: boolean;
+}
 
-export type Group = {
+export interface Group {
   id: string;
   name: string;
-  description: string | null;
-  created_at: string;
-};
+  description: string;
+  type?: string;
+  userCount?: number;
+  createdAt?: string;
+}
 
-export type Transaction = {
+export interface Transaction {
   id: string;
   sender_id: string;
   receiver_id: string;
   amount: number;
-  type: string; // e.g., 'transfer', 'fine', 'reward'
-  status: string; // e.g., 'completed', 'pending', 'failed'
+  type: string;
+  description: string;
+  status: string;
   created_at: string;
-  // Add other fields as per your transactions table
-};
+  senderName?: string;
+  receiverName?: string;
+}
+
+export interface RecentAdminAction {
+  id: string;
+  userId: string;
+  action: string;
+  details: string;
+  timestamp: string;
+}
+
+export interface SecurityLog {
+  id: string;
+  userId: string;
+  action: string;
+  details: string;
+  timestamp: string;
+  ipAddress: string;
+  category?: string;
+  severity?: 'info' | 'warning' | 'error';
+}
+
+export interface BulkUploadResult {
+  successCount: number;
+  errors: { row: number; message: string }[];
+}

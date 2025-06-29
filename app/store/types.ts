@@ -1,6 +1,6 @@
 import type { MarketplaceItem, PurchaseRecordWithBuyerDetails } from "~/types/market"; // Import market types
 
-export interface User {
+interface User {
   id: string;
   name: string;
   email: string;
@@ -12,7 +12,7 @@ export interface User {
   created_at?: string; // Added created_at
 }
 
-export interface Group {
+interface Group {
   id: string;
   name: string;
   description: string;
@@ -30,7 +30,7 @@ export interface Transaction {
   balance_after: number;
 }
 
-export interface StoreState {
+interface StoreState {
   currentUser: User | null;
   users: User[];
   groups: Group[]; // Added groups to store state

@@ -2,7 +2,7 @@ import { supabase, supabaseAdmin } from "~/lib/supabase";
 import type { UserProfile } from "~/types/user";
 
 // Get user profile by ID
-export async function getUserById(userId: string) {
+async function getUserById(userId: string) {
   const { data: profile, error } = await supabaseAdmin
     .from('profiles')
     .select('*')
@@ -18,7 +18,7 @@ export async function getUserById(userId: string) {
 }
 
 // Get user by email
-export async function getUserByEmail(email: string) {
+async function getUserByEmail(email: string) {
   const { data: profile, error } = await supabaseAdmin
     .from('profiles')
     .select('*')
@@ -34,7 +34,7 @@ export async function getUserByEmail(email: string) {
 }
 
 // Update user profile
-export async function updateUserProfile(
+async function updateUserProfile(
   userId: string,
   updates: Partial<UserProfile>
 ) {
@@ -54,7 +54,7 @@ export async function updateUserProfile(
 }
 
 // Create new user profile (to be called after auth user is created)
-export async function createUserProfile(
+async function createUserProfile(
   userId: string,
   profileData: {
     email: string;
@@ -86,7 +86,7 @@ export async function createUserProfile(
 }
 
 // Verify user exists in profiles table
-export async function verifyUserExists(userId: string) {
+async function verifyUserExists(userId: string) {
   const { data: profile, error } = await supabaseAdmin
     .from('profiles')
     .select('id')
@@ -102,7 +102,7 @@ export async function verifyUserExists(userId: string) {
 }
 
 // Get all users (for admin)
-export async function getAllUsers() {
+async function getAllUsers() {
   const { data: profiles, error } = await supabaseAdmin
     .from('profiles')
     .select('*')
@@ -117,7 +117,7 @@ export async function getAllUsers() {
 }
 
 // Search users (for admin)
-export async function searchUsers(query: string) {
+async function searchUsers(query: string) {
   const { data: profiles, error } = await supabaseAdmin
     .from('profiles')
     .select('*')
@@ -133,7 +133,7 @@ export async function searchUsers(query: string) {
 }
 
 // Update user balance
-export async function updateUserBalance(
+async function updateUserBalance(
   userId: string,
   amount: number,
   transactionType: 'credit' | 'debit'
@@ -158,7 +158,7 @@ export async function updateUserBalance(
 }
 
 // Helper function to ensure profile exists
-export async function ensureProfileExists(userId: string, email: string) {
+async function ensureProfileExists(userId: string, email: string) {
   const exists = await verifyUserExists(userId);
   if (!exists) {
     return await createUserProfile(userId, {
